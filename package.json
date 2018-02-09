@@ -1,0 +1,8 @@
+{
+  "name": "kbrew_hypertxt",
+  "version": "1.0.0",
+  "description": "Javascript to HTML generation tool.",
+  "main": "kbrew_hypertxt.js",
+  "author": "Kaden Griffith",
+  "license": "ISC"
+}

@@ -1,0 +1,278 @@
+#hyper_success {
+  display: none;
+  position: fixed;
+  color: green;
+  padding: 1em;
+  background-color: rgba(233,233,233,0.97);
+  border: 1px solid rgba(0,255,0,0.3);
+  border-radius: 0.1em;
+  text-shadow: none;
+  width: auto;
+  right: 3em;
+  text-align: right;
+  z-index: 90;
+}
+
+#hyper_error {
+  display: none;
+  position: fixed;
+  color: red;
+  padding: 1em;
+  background-color: rgba(233,233,233,0.97);
+  border: 1px solid rgba(255,0,0,0.3);
+  border-radius: 0.1em;
+  text-shadow: none;
+  width: auto;
+  right: 3em;
+  text-align: right;
+  z-index: 90;
+}
+
+.hyper_spacer {
+  display: block;
+  height: 57px;
+  width: 100%;
+}
+
+.hyper_loading {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 32px;
+  text-align: center;
+  padding-top: 25%;
+  color: #111;
+  background-color: #eee;
+  z-index: 99;
+}
+
+.hyper_menu {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  overflow-y: scroll;
+  background-color: #eee;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  z-index: 91;
+}
+
+.hyper_navbar {
+  display: grid;
+  position: fixed;
+  grid-template-columns: 128px repeat(4, minmax(120px, 1fr)) 1fr auto 8%;
+  grid-template-rows: 50px;
+  height: 50px;
+  width: 100%;
+  background-color: #f4f4f4;
+  border-bottom: 7px solid #ddd;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+  z-index: 90;
+}
+
+.hyper_grid {
+  display: grid;
+  grid-template-columns: 120px 26px auto auto;
+  grid-template-rows: 50px;
+  max-width: 250px;
+  height: 50px;
+  z-index: 95;
+}
+
+.hyper_profile_id {
+  display: none;
+  width: 120px;
+  white-space: nowrap;
+  float: right !important;
+  padding-top: 32px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#hyper_menu_signin, #hyper_navbar_signin {
+  display: inline-block;
+  padding-top: 32px;
+  float: right !important;
+}
+
+.hyper_profile_ext_credits_img {
+  display: none;
+  height: 18px;
+  width: 18px;
+  background-image: url("img/beatcoin.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 32px;
+  margin-left: 5px;
+}
+
+.hyper_profile_ext_credits_text {
+  padding-top: 32px;
+}
+
+.hyper_ext_cart {
+  width: 32px;
+  padding-top: 32px;
+}
+
+.hyper_link {
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+  z-index: 95;
+}
+
+.hyper_link:hover {
+  cursor: pointer;
+  color: #3F51B5;
+}
+
+.hyper_menu_link {
+  height: 64px;
+}
+
+.hyper_menu_link:first-of-type {
+  top: 64px;
+}
+
+.hyper_menu_link:hover {
+  cursor: pointer;
+  color: #3F51B5 !important;
+}
+
+.hyper_navbar_link {
+  padding-top: 16px;
+}
+
+.hyper_navbar_link:hover {
+  cursor: pointer;
+  color: #3F51B5 !important;
+}
+
+.hyper_action {
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+  z-index: 95;
+}
+
+.hyper_logo:hover {
+  cursor: pointer;
+}
+
+.hyper_action:hover {
+  color: #3F51B5;
+  cursor: pointer;
+}
+
+#hyper_menu_open {
+  display: none;
+}
+
+#hyper_menu_close {
+  padding-top: 10px;
+  margin-right: 1.5em;
+  float: right;
+}
+
+.hyper_navbar_centered {
+  text-align: center !important;
+}
+
+.hyper_offscreen_top {
+  top: -100%;
+}
+
+.hyper_offscreen_bottom {
+  bottom: -100%;
+}
+
+.hyper_offscreen_left {
+  left: -100%;
+}
+
+.hyper_offscreen_right {
+  right: -100%;
+}
+
+.hyper_align_centered {
+  text-align: center !important;
+}
+
+.hyper_align_left {
+  text-align: left !important;
+}
+
+.hyper_align_right {
+  text-align: right !important;
+}
+
+.hyper_centered {
+  margin: auto !important;
+}
+
+.hyper_left {
+  left: 0;
+}
+
+.hyper_top {
+  top: 0;
+}
+
+.hyper_bottom {
+  bottom: 0;
+}
+
+.hyper_right {
+  right: 0;
+}
+
+.hyper_normalized {
+  text-shadow: none;
+}
+
+@media screen and (max-width: 900px) {
+  .hyper_loading {
+    font-size: 20px;
+  }
+
+  #hyper_error, #hyper_success {
+    right: 0;
+  }
+
+  .hyper_navbar_link {
+    display: none;
+  }
+
+  #hyper_menu_open {
+    display: inline-block !important;
+    padding-top: 10px;
+    z-index: 90;
+  }
+
+  #hyper_navbar > .hyper_grid {
+    display: none;
+  }
+
+  .hyper_navbar {
+    grid-template-columns: 1fr auto 3em;
+  }
+
+  .hyper_profile_id {
+    max-width: 82px;
+  }
+
+  .hyper_title {
+    font-size: 28px;
+  }
+
+  .hyper_text {
+    font-size: 18px;
+  }
+}
