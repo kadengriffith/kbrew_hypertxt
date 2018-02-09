@@ -134,9 +134,9 @@ app.get('/', (res, req) => {
 
 You may have noticed the hyper_live key within our hypertext.index().
 
-This tells hypertext that we want to generate an additional screen in the predesignated section within our end hypertext.index() file.
+This tells hypertext that we want to generate additional screen HTML and were specifying that we want the the screen we chose to be the content within the div tag containing 'hyper_live' as a class. In this case screen1( ) has been chosen.
 
-But you may have also noticed that we haven't learned any of the cool generating functions we can utilize.
+But you may have also noticed that we haven't seen what any of these cool generating functions do, and how they make the files appear just like a typed document.
 
 ## Creating HTML
 
@@ -218,7 +218,7 @@ screen1() {
 ```
 
 
-In index() we write an entire HTML file and insert our additions which in this case is our screen1() which creates a div tag containing whatever content we wish. Note that the entire file could be constructed without the use of the components ('c' prefixed prototypes).
+In index(additions) we have written an entire HTML file and we inserted our additions, which in this case is what screen1( ) returns. Note that the entire file could be constructed without the use of the components (the unspoken 'c' prefixed prototypes).
 
 
 Save kbrew_hypertxt_templates.js, and we can now test the server and see what html we get back when we make a request!
@@ -288,12 +288,11 @@ The response should look identical to:
 ```
 
 PLEASE NOTE: 
-As of this moment the components used are geared toward a project I'm working on so but they are using the same structuring techniques seen in the kbrew_hypertxt_templates.js example. Please cater those to your needs and don't rely on the current customization.
+As of this moment the components used are meant for a project I'm working on but they are using the same structuring techniques seen in the kbrew_hypertxt_templates.js example. Please bend those to your needs and don't rely on the current limited customization.
 
 The main takeaway is that asking JavaScript to write your served files just became a lot more manageable.
 
-Hypertxt comes with a fully customizable stylesheet to include in your project files if you wish to use components and hypertxt styling.
-Hypertxt also includes a hypertxt_driver.js file that should be included if you intend to try out the components (Don't).
+Hypertxt comes with a fully customizable stylesheet to include in your project files if you wish to use components and hypertxt styling. Hypertxt also includes a kbrew_hypertxt_driver.js file that should be included if you intend to try out the components (Don't).
 
 Thanks
 
