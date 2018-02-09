@@ -26,60 +26,60 @@ Let's go through the different types of methods available:
 
 Example:
 ```
-  this.hypertxt.w_element();
+this.hypertxt.w_element();
 ```
 
 'wl' Prefixed => Write Live functions. These write to the live within the template hypertxt class object.
 
 Example:
 ```
-  this.hypertxt.wl_element();
+this.hypertxt.wl_element();
 ```
 
 'r' Prefixed => Return functions. These return direct elements to be used in construction of Html chunks.
 
 Example:
 ```
-  this.hypertxt.r_element();
+this.hypertxt.r_element();
 ```
 
 'c' Prefixed => Component functions. Very unusable and un-customizable components that I use and that I'm not taking out, so there.
 
 Example:
 ```
-  this.hypertxt.c_loading();
+this.hypertxt.c_loading();
 ```
 
 Now let's see what is built in:
 
 'w' Prefixed:
 ```
-  w_openHead() -- Writes a basic HTML start
-  w_element() -- Writes a fully customizable DOM object
+w_openHead() -- Writes a basic HTML start
+w_element() -- Writes a fully customizable DOM object
 ```
 
 'wl' Prefixed:
 ```
-  wl_openElement(properties) -- Writes to live, a fully customizable DOM object without </tag>
-  wl_closeElement(properties) -- Writes to live, </tag>
-  wl_element(properties) -- Writes to live, a fully customizable DOM object
+wl_openElement(properties) -- Writes to live, a fully customizable DOM object without </tag>
+wl_closeElement(properties) -- Writes to live, </tag>
+wl_element(properties) -- Writes to live, a fully customizable DOM object
 ```
 
 'r' Prefixed:
 ```
-  r_openElement(properties) -- Returns a fully customizable DOM object without </tag>
-  r_closeElement(properties) -- Returns </tag>
-  r_element(properties) -- Returns a fully customizable DOM object
-  r_ln() -- Line break
-  r_dln() -- Double line break
-  r_icon(choice, innerHTML) -- Returns a Font-Awesome icon
+r_openElement(properties) -- Returns a fully customizable DOM object without </tag>
+r_closeElement(properties) -- Returns </tag>
+r_element(properties) -- Returns a fully customizable DOM object
+r_ln() -- Line break
+r_dln() -- Double line break
+r_icon(choice, innerHTML) -- Returns a Font-Awesome icon
 ```
 
 'p' Prefixed: [ Process functions ]
 ```
-  p_contents(elementContents) -- replaces undefined content with air
-  p_document() -- process full document
-  p_live() -- process sectioned HTML intended to be sent as data and displayed in hyper_live
+p_contents(elementContents) -- replaces undefined content with air
+p_document() -- process full document
+p_live() -- process sectioned HTML intended to be sent as data and displayed in hyper_live
 ```
 
 ## Add hypertxt To Your Project
