@@ -1,6 +1,6 @@
 ### kbrew_hypertxt
 
-HyperTxt is an HTML generator written in Javascript. 
+Hypertxt is an HTML generator written in JavaScript. 
 
 This package is meant to simplify generating web pages with dynamic data tith the intent to then serve those pages to the client.
 
@@ -16,6 +16,12 @@ This package is meant to simplify generating web pages with dynamic data tith th
 
 ```
 npm install --save kbrew_hypertxt
+```
+
+or to use without Node JS ( No Tutorial )
+
+```
+git clone https://yourforkedrepo/kbrew_hypertxt.git
 ```
 
 ### Basics
