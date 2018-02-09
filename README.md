@@ -306,3 +306,4 @@ This is a list of the project intentions
 * Component configurations and more complete styles
 * Shorten syntax
 * More thoughtful way of detecting when to close tags
+* Fix links to accept href as well as onclick (Don't think I didn't see my mistakes).
