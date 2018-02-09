@@ -49,8 +49,7 @@ Example:
 this.hypertxt.r_element();
 ```
 
-'c' Prefixed => Component functions. Very unusable and un-customizable components that I use and that I'm not taking out, so there.
-
+'c' Prefixed => Component functions. Very unusable and un-customizable components ( Not Recommended )
 Example:
 ```
 this.hypertxt.c_loading();
@@ -87,6 +86,8 @@ p_contents(elementContents) -- replaces undefined content with air
 p_document() -- process full document
 p_live() -- process sectioned HTML intended to be sent as data and displayed in hyper_live
 ```
+
+'c' Prefixed: [ Component Functions ] > See kbrew_hypertxt.js to manipulate these if you dare.
 
 ## Add hypertxt To Your Project
 
@@ -138,9 +139,9 @@ app.get('/', (res, req) => {
 });
 ```
 
-You may have noticed the hyper_live key within our hypertext.index().
+You may have noticed the 'hyper_live' key within our hypertext.index({ }).
 
-This tells hypertext that we want to generate additional screen HTML and were specifying that we want the the screen we chose to be the content within the div tag containing 'hyper_live' as a class. In this case screen1( ) has been chosen.
+This tells hypertext that we want to generate additional screen HTML and were specifying that we want the the screen we chose to be the content within the div tag containing the 'hyper_live' class. In this case screen1( ) has been chosen.
 
 But you may have also noticed that we haven't seen what any of these cool generating functions do, and how they make the files appear just like a typed document.
 
