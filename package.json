@@ -4,5 +4,13 @@
   "description": "Javascript to HTML generation tool.",
   "main": "kbrew_hypertxt.js",
   "author": "Kaden Griffith",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/kadengriffith/kbrew_hypertxt#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadengriffith/kbrew_hypertxt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kadengriffith/inorganicaudio/issues"
+  }
 }
