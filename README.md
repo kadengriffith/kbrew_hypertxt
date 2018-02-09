@@ -1,13 +1,11 @@
-# kbrew_hypertxt
+### kbrew_hypertxt
 
-HyperTxt is an HTML generator written in Javascript. This package is meant to simplify generating web pages with dynamic data tith the intent to then serve those pages to the client.
-This includes the latest FontAwesome icon library as well. 
+HyperTxt is an HTML generator written in Javascript. 
 
-## Getting Started
+This package is meant to simplify generating web pages with dynamic data tith the intent to then serve those pages to the client.
 
-```
-npm install --save kbrew_hypertxt
-```
+* FontAwesome icons included. 
+
 
 ### Prerequisites
 
@@ -15,29 +13,39 @@ npm install --save kbrew_hypertxt
 * [x] Server-side File Serving
 * [x] Familiar With Javascript Objects
 
+## Getting Started
+
+```
+npm install --save kbrew_hypertxt
+```
+
 ### Basics
 
 Let's go through the different types of methods available:
 
 'w' Prefixed => Write functions. These write to the html within the template hypertxt class object.
+
 Example:
 ```
   this.hypertxt.w_element();
 ```
 
 'wl' Prefixed => Write Live functions. These write to the live within the template hypertxt class object.
+
 Example:
 ```
   this.hypertxt.wl_element();
 ```
 
 'r' Prefixed => Return functions. These return direct elements to be used in construction of Html chunks.
+
 Example:
 ```
   this.hypertxt.r_element();
 ```
 
 'c' Prefixed => Component functions. Very unusable and un-customizable components that I use and that I'm not taking out, so there.
+
 Example:
 ```
   this.hypertxt.c_loading();
@@ -82,6 +90,7 @@ Create a new file that will contain our template class of hypertxt page generato
 ```
 sudo nano kbrew_hypertxt_templates.js
 ```
+
 Copy this into the file you've just made.
 
 ```
@@ -132,9 +141,7 @@ But you may have also noticed that we haven't learned any of the cool generating
 
 ## Creating HTML
 
-Hopping back to kbrew_hypertxt_templates.js, we want to make something that resembles an HTML file.
-
-To do this we can copy this starting structure to see how the basic functionality is laid out.
+Hopping back to kbrew_hypertxt_templates.js, we want to make something that resembles an HTML file. To do this we can copy this starting structure to see how the basic functionality is laid out.
 
 ```
 index(additions) {
@@ -211,10 +218,12 @@ screen1() {
 }
 ```
 
-In index() we write an entire HTML file and insert our additions which in this case is our screen1() which creates a <div> containing whatever content we wish.
-Note that the entire file could be constructed without the use of the components ('c' prefixed prototypes).
+
+In index() we write an entire HTML file and insert our additions which in this case is our screen1() which creates a div tag containing whatever content we wish. Note that the entire file could be constructed without the use of the components ('c' prefixed prototypes).
+
 
 Save kbrew_hypertxt_templates.js, and we can now test the server and see what html we get back when we make a request!
+
 
 The response should look identical to: 
 
@@ -279,8 +288,8 @@ The response should look identical to:
 </html>
 ```
 
-PLEASE NOTE: As of this moment the components used are geared toward a project I'm working on so but they are using the same structuring techniques
-seen in the kbrew_hypertxt_templates.js example. Please cater those to your needs and don't rely on the current customization.
+PLEASE NOTE: 
+As of this moment the components used are geared toward a project I'm working on so but they are using the same structuring techniques seen in the kbrew_hypertxt_templates.js example. Please cater those to your needs and don't rely on the current customization.
 
 The main takeaway is that asking JavaScript to write your served files just became a lot more manageable.
 
@@ -293,8 +302,8 @@ Thanks
 
 This is a list of the project intentions
 
-* [] Navbar and Menu need to be less constrained
-* [] More components
-* [] Component configurations and more complete styles
-* [] Shorten syntax
-* [] More thoughtful way of detecting when to close tags
+* Navbar and Menu need to be less constrained
+* More components
+* Component configurations and more complete styles
+* Shorten syntax
+* More thoughtful way of detecting when to close tags
