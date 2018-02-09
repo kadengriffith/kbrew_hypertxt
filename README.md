@@ -6,7 +6,6 @@ This package is meant to simplify generating web pages with dynamic data tith th
 
 * FontAwesome icons included. 
 
-
 ### Prerequisites
 
 * [x] Node JS Web Application
@@ -196,7 +195,7 @@ index(additions) {
   }
   this.hypertxt.w_element({
     tag: 'script',
-    src: '../hypertxt_driver.js',
+    src: './kbrew_hypertxt_driver.js',
     type: 'text/javascript'
   });
   this.hypertxt.w_closeElement({
@@ -235,7 +234,7 @@ The response should look identical to:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="ie=edge">
     <title>Title of client HTML</title>
-    <link href="../src/kbrew_hypertxt_style.css" rel="stylesheet">
+    <link href="./kbrew_hypertxt_style.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link src="./favicon.png" rel="icon" type="image/png">
     <link href="./style.css" rel="stylesheet">
@@ -283,7 +282,7 @@ The response should look identical to:
         <h1 class="hyper_title">Wow! HTML from this?<i class="fas fa-heart"></i></h1>
       </div>
     </div>
-    <script src="../hypertxt_driver.js" type="text/javascript"></script>
+    <script src="./hypertxt_driver.js" type="text/javascript"></script>
   </body>
 </html>
 ```
