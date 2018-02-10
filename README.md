@@ -124,7 +124,7 @@ Now we will require that file in your Node JS server application.
 
 ```
 const hypertxt_templates = require('PATH/TO/kbrew_hypertxt_templates.js'),
-      hypertxt = new hyprtxt_texmplates('Title of client HTML');
+      hypertxt = new hypertxt_templates('Title of client HTML');
 ```
 
 Now when the server receives a request we can utilize our templated files that we will create.
