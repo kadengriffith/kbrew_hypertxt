@@ -141,7 +141,7 @@ app.get('/', (res, req) => {
 
 You may have noticed the 'hyper_live' key within our hypertext.index({ }).
 
-This tells hypertext that we want to generate additional screen HTML and were specifying that we want the the screen we chose to be the content within the div tag containing the 'hyper_live' class. In this case screen1( ) has been chosen.
+This tells hypertext that we want to generate additional screen HTML and we're specifying that we want the the screen we chose to be the content within the div tag containing the 'hyper_live' class. In this case screen1( ) has been chosen.
 
 But you may have also noticed that we haven't seen what any of these cool generating functions do, and how they make the files appear just like a typed document.
 
@@ -295,7 +295,7 @@ The response should look identical to:
 ```
 
 PLEASE NOTE: 
-As of this moment the components used are meant for a project I'm working on but they are using the same structuring techniques seen in the kbrew_hypertxt_templates.js example. Please bend those to your needs and don't rely on the current limited customization.
+The components are meant for a project I'm working on but they are using the same structuring techniques seen in the kbrew_hypertxt_templates.js example. Please bend those to your needs and don't rely on the current limited customization.
 
 The main takeaway is that asking JavaScript to write your served files just became a lot more manageable.
 
