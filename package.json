@@ -1,10 +1,10 @@
 {
   "name": "kbrew_hypertxt",
-  "version": "1.0.0",
-  "description": "Javascript to HTML generation tool.",
+  "version": "1.0.1",
+  "description": "HTML generator written in JavaScript.",
   "main": "kbrew_hypertxt.js",
   "author": "Kaden Griffith",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/kadengriffith/kbrew_hypertxt#readme",
   "repository": {
     "type": "git",

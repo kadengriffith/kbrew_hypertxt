@@ -1,15 +1,15 @@
-### kbrew_hypertxt
+## kbrew_hypertxt v. 1.0.1
 
-Hypertxt is an HTML generator written in JavaScript. 
+Hypertxt is an HTML generator written in JavaScript.
 
 This package is meant to simplify generating web pages with dynamic data.
 
-* FontAwesome icons included. 
+* Simplified dynamic HTML object writing solution.
+* FontAwesome icons included.
 
 ### Prerequisites
 
 * [x] Node JS Web Application
-* [x] Server-side File Serving
 * [x] Familiar With Javascript Objects
 
 ## Getting Started
@@ -18,220 +18,154 @@ This package is meant to simplify generating web pages with dynamic data.
 npm install --save kbrew_hypertxt
 ```
 
-or to use without Node JS ( No Tutorial )
-
-```
-git clone https://yourforkedrepo/kbrew_hypertxt.git
-```
-
-### Basics
+## Basics
 
 Let's go through the different types of methods available:
 
-'w' Prefixed => Write functions. These write to the html within the template hypertxt class object.
+```
+// Write HTML document
+getFile(properties)
 
-Example:
-```
-this.hypertxt.w_element();
-```
+// Write element with configurable tag type and properties
+write(properties)
 
-'wl' Prefixed => Write Live functions. These write to the live within the template hypertxt class object.
+// Write an open ended element with configurable tag type and properties
+writeOpenElement(properties)
 
-Example:
-```
-this.hypertxt.wl_element();
-```
+// Returns an element with configurable tag type and properties
+getElement(properties)
 
-'r' Prefixed => Return functions. These return direct elements to be used in construction of Html chunks.
+// Returns an open ended element with configurable tag type and properties
+getOpenElement(properties)
 
-Example:
-```
-this.hypertxt.r_element();
-```
+// Close an element with configurable tag type
+closeElement(properties)
 
-'c' Prefixed => Component functions. Very unusable and un-customizable components ( Not Recommended )
-Example:
-```
-this.hypertxt.c_loading();
-```
+// Return a line break
+ln()
 
-Now let's see what is built in:
+// Return a bouble line break
+dln()
 
-'w' Prefixed:
-```
-w_openHead() -- Writes a basic HTML start
-w_element() -- Writes a fully customizable DOM object
-```
+// Return a FontAwesome icon
+icon(properties)
 
-'wl' Prefixed:
-```
-wl_openElement(properties) -- Writes to live, a fully customizable DOM object without </tag>
-wl_closeElement(properties) -- Writes to live, </tag>
-wl_element(properties) -- Writes to live, a fully customizable DOM object
+// Filter undefined innerHTML
+processContent(elementContent)
+
+// Clears all written data
+clear()
 ```
 
-'r' Prefixed:
-```
-r_openElement(properties) -- Returns a fully customizable DOM object without </tag>
-r_closeElement(properties) -- Returns </tag>
-r_element(properties) -- Returns a fully customizable DOM object
-r_ln() -- Line break
-r_dln() -- Double line break
-r_icon(choice, innerHTML) -- Returns a Font-Awesome icon
-```
+## Creating HTML
 
-'p' Prefixed: [ Process functions ]
-```
-p_contents(elementContents) -- replaces undefined content with air
-p_document() -- process full document
-p_live() -- process sectioned HTML intended to be sent as data and displayed in hyper_live
-```
+PLEASE NOTE:
+In the 'demo' folder of the installed package, you will find this example already written with a basic server ready to go if you wish to explore on your own.
 
-'c' Prefixed: [ Component Functions ] > See kbrew_hypertxt.js to manipulate these if you dare.
+Let's take a look at how hypertxt can be used to write a virtual file and send the content back to our client using Express.
 
-## Add hypertxt To Your Project
+In this example we will create a Node/Express server application and use simple routing to send the data hypertxt writes for us.
 
-Create a new file that will contain our template class of hypertxt page generators.
+Create a new file that will contain our easily manageable class of hypertxt page generators.
 
 ```
 sudo nano kbrew_hypertxt_templates.js
 ```
 
-Copy this into the file you've just made.
+Copy the following into the file you've just made.
 
 ```
 const hypertxt = require('kbrew_hypertxt');
 
 class hypertxt_templates {
-  constructor(title) {
-    this.hypertxt = new hypertxt(title);
+  constructor() {
+    this.hypertxt = new hypertxt('Project Name');
   }
-  
-  index(additions) {
-    
-  }
-  
-  screen1() {
 
+  index(additions) {
+    return this.hypertxt.getFile({
+      head: this.hypertxt.getOpenElement({
+        tag: 'link',
+        src: './favicon.png',
+        rel: 'icon',
+        type: 'image/png'
+      }) + this.hypertxt.getOpenElement({
+        tag: 'link',
+        href: './somefile.css',
+        rel: 'stylesheet'
+      }) + this.hypertxt.getOpenElement({
+        tag: 'link',
+        href: 'https://fonts.googleapis.com/css?family=Ubuntu',
+        rel: 'stylesheet'
+      }),
+      body: this.hypertxt.processContent(additions.body) + this.hypertxt.getElement({
+        tag: 'script',
+        src: './somefile.js',
+        type: 'text/javascript'
+      })
+    });
   }
-};  
+
+  liveExample() {
+    return this.hypertxt.getElement({
+      class: 'center',
+      contains: this.hypertxt.getElement({
+        tag: 'h1',
+        class: 'title',
+        contains: "Wow! HTML from this? " + this.hypertxt.icon({
+          // View icon list at: https://fontawesome.com/icons?d=gallery
+          icon: 'heart'
+        })
+      }) + this.hypertxt.ln() + this.hypertxt.getElement({
+        tag: 'a',
+        href: 'https://developer.mozilla.org/en-US/',
+        contains: 'Learn how to write JavaScript'
+      })
+    });
+  }
+};
 
 module.exports = hypertxt_templates;
 ```
-Save that file, noting its location relative to your server.
 
-Now we will require that file in your Node JS server application.
+Save the file, noting its location relative to your server.
+
+Now, we will require that file in your Node JS server application.
 
 ```
 const hypertxt_templates = require('PATH/TO/kbrew_hypertxt_templates.js'),
-      hypertxt = new hypertxt_templates('Title of client HTML');
+      hypertxt = new hypertxt_templates();
 ```
 
-Now when the server receives a request we can utilize our templated files that we will create.
+Now, when the server receives a request, we can utilize our templated files that live inside our kbrew_hypertxt_templates.js file.
 
 For example:
 
 ```
 app.get('/', (res, req) => {
   res.send(hypertxt.index({
-    hyper_live: hypertxt.screen1()
+    body: hypertxt.liveExample()
   }));
 });
 ```
 
-You may have noticed the 'hyper_live' key within our hypertext.index({ }).
+You may have noticed the 'body' key within our hypertext.index({ }).
 
-This tells hypertext that we want to generate additional screen HTML and we're specifying that we want the the screen we chose to be the content within the div tag containing the 'hyper_live' class. In this case screen1( ) has been chosen.
+This tells hypertext that we want to generate additional content in the body section of the returned hypertext.index( ) file.
 
-But you may have also noticed that we haven't seen what any of these cool generating functions do, and how they make the files appear just like a typed document.
+In hypertxt.index( ), we have written an entire recallable HTML file with body content consisting of what was returned from hypertxt.liveExample( ). Using a structure similar to this allows for the use of static components that can be built much like the content delivered in hypertxt.liveExample( ).
 
-## Creating HTML
+We can now test the server and see what html we get back when we make a request!
 
-Hopping back to kbrew_hypertxt_templates.js, we want to make something that resembles an HTML file. To do this we can copy this starting structure to see how the basic functionality is laid out.
+If you are using the demo you can test the server by running:
 
 ```
-index(additions) {
-  let links = [{
-    text: 'Google',
-    href: "https://google.com"
-  }, {
-    text: 'Mozilla',
-    href: "https://developer.mozilla.org/en-US/"
-  }];
-  this.hypertxt.w_openHead();
-  this.hypertxt.w_openElement({
-    tag: 'link',
-    src: './favicon.png',
-    rel: 'icon',
-    type: 'image/png'
-  });
-  this.hypertxt.w_openElement({
-    tag: 'link',
-    href: './style.css',
-    rel: 'stylesheet'
-  });
-  this.hypertxt.w_openElement({
-    tag: 'link',
-    href: 'https://fonts.googleapis.com/css?family=Ubuntu',
-    rel: 'stylesheet'
-  });
-  this.hypertxt.w_closeElement({
-    tag: 'head'
-  });
-  this.hypertxt.w_openElement({
-    tag: 'body'
-  });
-  this.hypertxt.c_menu({
-    links_array: links,
-    style: 'centered',
-    location: 'hyper_offscreen_top'
-  });
-  this.hypertxt.c_navbar({
-    links_array: links,
-    style: 'centered'
-  });
-  this.hypertxt.c_loading();
-  this.hypertxt.c_spacer();
-  this.hypertxt.c_alerts();
-  if (additions.hyper_live) {
-    this.hypertxt.c_live_render({
-      contains: additions.hyper_live
-    });
-  } else {
-    this.hypertxt.c_live_render();
-  }
-  this.hypertxt.w_element({
-    tag: 'script',
-    src: './kbrew_hypertxt_driver.js',
-    type: 'text/javascript'
-  });
-  this.hypertxt.w_closeElement({
-    tag: 'body'
-  });
-  return this.hypertxt.p_document();
-}
-
-screen1() {
-  this.hypertxt.wl_element({
-    class: 'hyper_align_center',
-    contains: this.hypertxt.r_element({
-      tag: 'h1',
-      class: 'hyper_title',
-      contains: "Wow! HTML from this?" + this.hypertxt.r_icon('heart')
-    })
-  });
-  return this.hypertxt.p_live();
-}
+npm start
 ```
 
+Visit localhost:5000 to view the end result.
 
-In index(additions) we have written an entire HTML file and we inserted our additions, which in this case is what screen1( ) returns. Note that the entire file could be constructed without the use of the components (the unspoken 'c' prefixed prototypes).
-
-
-Save kbrew_hypertxt_templates.js, and we can now test the server and see what html we get back when we make a request!
-
-
-The response should look identical to: 
+Right clicking and selecting view source in Chrome, the response should look identical to:
 
 ```
 <!DOCTYPE html>
@@ -240,76 +174,28 @@ The response should look identical to:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="ie=edge">
-    <title>Title of client HTML</title>
-    <link href="./kbrew_hypertxt_style.css" rel="stylesheet">
+    <title>Project Name</title>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link src="./favicon.png" rel="icon" type="image/png">
-    <link href="./style.css" rel="stylesheet">
+    <link href="./somefile.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   </head>
   <body>
-    <div class="hyper_menu hyper_offscreen_top hyper_top hyper_left" id="hyper_menu">
-      <i class="fas fa-2x fa-times hyper_link" id="hyper_menu_close" onclick="javascript:toggleMenu(false);"></i>
-      <div class="hyper_spacer"></div>
-      <div class="hyper_menu_links">
-        <div class="hyper_link hyper_menu_link hyper_centered" onclick="undefined">Google</div>
-        <div class="hyper_link hyper_menu_link hyper_centered" onclick="undefined">Mozilla</div>
-        <div class="hyper_grid hyper_centered">
-          <div class="hyper_profile_id hyper_align_right hyper_link hyper_normalized" onclick="javascript:emit('/profile');"></div>
-          <div class="hyper_link hyper_align_right hyper_normalized" id="hyper_menu_signin">Sign In</div>
-          <div class="hyper_profile_ext_credits_img"></div>
-          <div class="hyper_profile_ext_credits_text hyper_text hyper_normalized"></div>
-          <i class="fas fa-shopping-cart hyper_ext_cart hyper_link hyper_normalized" onclick="javascript:emit('/cart');"></i>
-        </div>
-       </div>
+    <div class="center">
+      <h1 class="title">Wow! HTML from this? <i class="fas fa-heart"></i></h1>
+      <br>
+      <a href="https://developer.mozilla.org/en-US/">Learn how to write JavaScript</a>
     </div>
-    <div class="hyper_navbar hyper_top hyper_left" id="hyper_navbar">
-      <div onclick="javascript:emit('/start');" class="hyper_logo hyper_link">
-       <canvas width="128" height="50" id="hyper_logo"></canvas>
-      </div>
-      <i id="hyper_menu_open" onclick="javascript:toggleMenu(true);" class="fa fa-bars fa-2x hyper_action"></i>
-      <div class="hyper_navbar_link hyper_navbar_centered" onclick="undefined">Google</div>
-      <div class="hyper_navbar_link hyper_navbar_centered" onclick="undefined">Mozilla</div>
-      <div class="hyper_grid hyper_centered">
-        <div>
-          <div class="hyper_profile_id hyper_align_right hyper_link hyper_normalized" onclick="javascript:emit('/profile');"></div>
-          <div class="hyper_link hyper_align_right hyper_normalized" id="hyper_navbar_signin" onclick="javascript:emit('/signIn');">Sign In</div>
-        </div>
-        <div class="hyper_profile_ext_credits_img"></div>
-        <div class="hyper_profile_ext_credits_text hyper_text hyper_normalized"></div>
-        <i class="fas fa-shopping-cart hyper_ext_cart hyper_link hyper_align_center hyper_normalized" style="display: none;" onclick="javascript:emit('/cart');"></i>
-      </div>
-    </div>
-    <div class="hyper_loading"></div>
-    <div class="hyper_spacer"></div>
-    <div id="hyper_error"></div>
-    <div id="hyper_success"></div>
-    <div class="hyper_live">
-      <div class="hyper_align_center">
-        <h1 class="hyper_title">Wow! HTML from this?<i class="fas fa-heart"></i></h1>
-      </div>
-    </div>
-    <script src="./hypertxt_driver.js" type="text/javascript"></script>
+    <script src="./somefile.js" type="text/javascript"></script>
   </body>
 </html>
 ```
 
-PLEASE NOTE: 
-The components are meant for a project I'm working on but they are using the same structuring techniques seen in the kbrew_hypertxt_templates.js example. Please bend those to your needs and don't rely on the current limited customization.
+This concludes the basics of writing HTML using hypertxt templating techniques.
 
-The main takeaway is that asking JavaScript to write your served files just became a lot more manageable.
+PLEASE NOTE:
+This library is also very useful in client-side applications as well; however, the implementation is very similar to the example shown above so I will leave the experimentation to you. This package is more deliverable to Node server development but feel free to fork and clone this repo to use the class outside of Node applications. If you have any questions, or need some guided examples, please ask and I will create them and append them to this readme.md! Thanks.
 
-Hypertxt comes with a fully customizable stylesheet to include in your project files if you wish to use components and hypertxt styling. Hypertxt also includes a kbrew_hypertxt_driver.js file that should be included if you intend to try out the components (Don't).
+## License
 
-Thanks
-
-## TODO :
-
-This is a list of the project intentions
-
-* Navbar and Menu need to be less constrained
-* More components
-* Component configurations and more complete styles
-* Shorten syntax
-* More thoughtful way of detecting when to close tags
-* Fix links to accept href as well as onclick (Don't think I didn't see my mistakes).
+The package is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
