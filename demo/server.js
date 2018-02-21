@@ -1,5 +1,5 @@
-// author      : Kaden Griffith
-// filename    : server.js
+// author   : Kaden Griffith
+// filename : server.js
 
 // Live Port
 const port = 5000;
@@ -7,16 +7,12 @@ const port = 5000;
 // Example Dependencies
 const express = require('express'),
   app = express(),
-  hypertxt_templates = require('./kbrew_hypertxt_templates.js'),
-  hypertxt = new hypertxt_templates();
-
-app.set('port', port);
-app.use(express.static('./public/'));
+  Templates = require('./Templates')();
 
 // Http request handler
 app.get('/', (req, res) => {
-  res.send(hypertxt.index({
-    body: hypertxt.liveExample()
+  res.send(Templates.index({
+    body: Templates.example()
   }));
 });
 

@@ -1,6 +1,6 @@
 {
   "name": "kbrew_hypertxt_demo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Demo of kbrew_hypertxt.",
   "main": "server.js",
   "scripts": {
@@ -9,6 +9,6 @@
   "author": "Kaden Griffith",
   "license": "MIT",
   "dependencies": {
-    "kbrew_hypertxt": "^1.0.0"
+    "kbrew_hypertxt": "^1.0.2"
   }
 }

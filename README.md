@@ -1,21 +1,21 @@
-## kbrew_hypertxt v. 1.0.1
+## kbrew_hypertxt -- version 1.0.2
 
 Hypertxt is an HTML generator written in JavaScript.
 
-This package is meant to simplify generating web pages with dynamic data.
+This package is meant to simplify web page generation to a single line, while managing dynamic data consistently.
+* FontAwesome icon integration by default.
 
-* Simplified dynamic HTML object writing solution.
-* FontAwesome icons included.
+### Before You Go Further...
 
-### Prerequisites
-
-* [x] Node JS Web Application
+This package needs you to be okay with:
+* [x] Node JS / Express Web Applications
 * [x] Familiar With Javascript Objects
+* [x] Familiar With ES6 Syntax
 
 ## Getting Started
 
 ```
-npm install --save kbrew_hypertxt
+npm install kbrew_hypertxt
 ```
 
 ## Basics
@@ -23,7 +23,7 @@ npm install --save kbrew_hypertxt
 Let's go through the different types of methods available:
 
 ```
-// Write HTML document
+// Write a sendable HTML document
 getFile(properties)
 
 // Write element with configurable tag type and properties
@@ -44,11 +44,14 @@ closeElement(properties)
 // Return a line break
 ln()
 
-// Return a bouble line break
+// Return a double line break
 dln()
 
 // Return a FontAwesome icon
 icon(properties)
+
+// Return a 'far' FontAwesome icon
+outlineIcon(properties)
 
 // Filter undefined innerHTML
 processContent(elementContent)
@@ -60,104 +63,103 @@ clear()
 ## Creating HTML
 
 PLEASE NOTE:
-In the 'demo' folder of the installed package, you will find this example already written with a basic server ready to go if you wish to explore on your own.
+In the 'demo' folder of the installed package, you will find this example already written with a basic server ready to go if you wish to explore on your own. Please read the README.md file within the 'demo' folder for its operational instructions.
 
-Let's take a look at how hypertxt can be used to write a virtual file and send the content back to our client using Express.
+Now, let's take a look at how hypertxt can be used to write a virtual file and send the content back to our client using Express web app structures.
 
-In this example we will create a Node/Express server application and use simple routing to send the data hypertxt writes for us.
+In this example, we will create a Node / Express server application and use simple routing to send the data hypertxt writes for us.
 
-Create a new file that will contain our easily manageable class of hypertxt page generators.
-
-```
-sudo nano kbrew_hypertxt_templates.js
-```
-
-Copy the following into the file you've just made.
+Create a new file that will contain our easily manageable collection of hypertxt page generators.
 
 ```
-const hypertxt = require('kbrew_hypertxt');
+sudo nano Templates.js
+```
 
-class hypertxt_templates {
-  constructor() {
-    this.hypertxt = new hypertxt('Project Name');
+Copy the following into the file you've just opened.
+
+```
+module.exports = Templates;
+
+function Templates() {
+  if (!(this instanceof Templates)) {
+    return new Templates();
   }
 
-  index(additions) {
-    return this.hypertxt.getFile({
-      head: this.hypertxt.getOpenElement({
-        tag: 'link',
-        src: './favicon.png',
-        rel: 'icon',
-        type: 'image/png'
-      }) + this.hypertxt.getOpenElement({
-        tag: 'link',
-        href: './somefile.css',
-        rel: 'stylesheet'
-      }) + this.hypertxt.getOpenElement({
-        tag: 'link',
-        href: 'https://fonts.googleapis.com/css?family=Ubuntu',
-        rel: 'stylesheet'
-      }),
-      body: this.hypertxt.processContent(additions.body) + this.hypertxt.getElement({
-        tag: 'script',
-        src: './somefile.js',
-        type: 'text/javascript'
+  Templates.hypertxt = require('kbrew_hypertxt')('Project Name');
+}
+
+Templates.prototype.index = (additions) => {
+  return Templates.hypertxt.getFile({
+    head: Templates.hypertxt.getOpenElement({
+      tag: 'link',
+      src: './favicon.png',
+      rel: 'icon',
+      type: 'image/png'
+    }) + Templates.hypertxt.getOpenElement({
+      tag: 'link',
+      href: './somefile.css',
+      rel: 'stylesheet'
+    }) + Templates.hypertxt.getOpenElement({
+      tag: 'link',
+      href: 'https://fonts.googleapis.com/css?family=Ubuntu',
+      rel: 'stylesheet'
+    }),
+    body: Templates.hypertxt.processContent(additions.body) + Templates.hypertxt.getElement({
+      tag: 'script',
+      src: './somefile.js',
+      type: 'text/javascript'
+    })
+  });
+}
+
+Templates.prototype.example = () => {
+  return Templates.hypertxt.getElement({
+    class: 'center',
+    contains: Templates.hypertxt.getElement({
+      tag: 'h1',
+      class: 'title',
+      contains: "Wow! HTML from this? " + Templates.hypertxt.icon({
+        // View icon list at: https://fontawesome.com/icons?d=gallery
+        icon: 'heart'
       })
-    });
-  }
-
-  liveExample() {
-    return this.hypertxt.getElement({
-      class: 'center',
-      contains: this.hypertxt.getElement({
-        tag: 'h1',
-        class: 'title',
-        contains: "Wow! HTML from this? " + this.hypertxt.icon({
-          // View icon list at: https://fontawesome.com/icons?d=gallery
-          icon: 'heart'
-        })
-      }) + this.hypertxt.ln() + this.hypertxt.getElement({
-        tag: 'a',
-        href: 'https://developer.mozilla.org/en-US/',
-        contains: 'Learn how to write JavaScript'
-      })
-    });
-  }
-};
-
-module.exports = hypertxt_templates;
+    }) + Templates.hypertxt.ln() + Templates.hypertxt.getElement({
+      tag: 'a',
+      href: 'https://developer.mozilla.org/en-US/',
+      contains: 'Learn how to write JavaScript'
+    })
+  });
+}
 ```
 
-Save the file, noting its location relative to your server.
+Save the file, noting its location relative to your server file.
 
-Now, we will require that file in your Node JS server application.
+Now, we will require Templates.js in your Node JS server file.
 
 ```
-const hypertxt_templates = require('PATH/TO/kbrew_hypertxt_templates.js'),
-      hypertxt = new hypertxt_templates();
+const Templates = require('./PATH/TO/Templates')();
 ```
 
-Now, when the server receives a request, we can utilize our templated files that live inside our kbrew_hypertxt_templates.js file.
+Now, when the server receives a request, we can utilize our templated files that live inside Templates.js.
 
-For example:
+For example in the demo we use:
 
 ```
 app.get('/', (res, req) => {
-  res.send(hypertxt.index({
-    body: hypertxt.liveExample()
+  res.send(Templates.index({
+    body: Templates.example()
   }));
 });
 ```
 
-You may have noticed the 'body' key within our hypertext.index({ }).
+You may have noticed the 'body' key within our Templates.index({ }).
 
-This tells hypertext that we want to generate additional content in the body section of the returned hypertext.index( ) file.
+This tells hypertext that we want to generate as additional content in the body section of the returned Templates.index( ) file.
 
-In hypertxt.index( ), we have written an entire recallable HTML file with body content consisting of what was returned from hypertxt.liveExample( ). Using a structure similar to this allows for the use of static components that can be built much like the content delivered in hypertxt.liveExample( ).
+In Templates.index( ), we have written an entire recallable HTML file with body content consisting of what was returned from Templates.example( ). Using a structure similar to this allows for the use of static components that can be built on demand much like the content delivered in Templates.example( ). Please Note: There are general head meta tags inserted by default and more can be added much like a link tag.
 
-We can now test the server and see what html we get back when we make a request!
+Getting back to the demo, we can now test the server and see what HTML we get back when we make a request!
 
-If you are using the demo you can test the server by running:
+If you are following along and using the demo you can test the pre-made server by running:
 
 ```
 npm start
@@ -165,7 +167,7 @@ npm start
 
 Visit localhost:5000 to view the end result.
 
-Right clicking and selecting view source in Chrome, the response should look identical to:
+Right clicking and selecting 'view source' in Chrome, the response should look identical to:
 
 ```
 <!DOCTYPE html>
@@ -191,10 +193,10 @@ Right clicking and selecting view source in Chrome, the response should look ide
 </html>
 ```
 
-This concludes the basics of writing HTML using hypertxt templating techniques.
+This concludes the basics of writing HTML using kbrew_hypertxt templating techniques.
 
 PLEASE NOTE:
-This library is also very useful in client-side applications as well; however, the implementation is very similar to the example shown above so I will leave the experimentation to you. This package is more deliverable to Node server development but feel free to fork and clone this repo to use the class outside of Node applications. If you have any questions, or need some guided examples, please ask and I will create them and append them to this readme.md! Thanks.
+This library is also very useful in client-side applications; however, the implementation is very similar to the example shown above so I will leave the experimentation to you. This package is more deliverable to Node server development but feel free to fork and clone the repo to use the collection outside of Node application development. If you have any questions, or need some use case help, please ask and I will create them and append them to this README.md! Thanks.
 
 ## License
 
