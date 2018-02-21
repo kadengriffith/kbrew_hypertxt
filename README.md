@@ -159,9 +159,10 @@ In Templates.index( ), we have written an entire recallable HTML file with body 
 
 Getting back to the demo, we can now test the server and see what HTML we get back when we make a request!
 
-If you are following along and using the demo you can test the pre-made server by running:
+If you are following along and using the demo, you can test the pre-made server in the 'demo' folder by running:
 
 ```
+npm install --save express kbrew_hypertxt
 npm start
 ```
 
