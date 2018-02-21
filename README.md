@@ -9,8 +9,8 @@ This package is meant to simplify web page generation to a single line, while ma
 
 This package needs you to be okay with:
 * [x] Node JS / Express Web Applications
-* [x] Familiar With Javascript Objects
-* [x] Familiar With ES6 Syntax
+* [x] Javascript Objects
+* [x] ES6 Syntax
 
 ## Getting Started
 
