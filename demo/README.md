@@ -8,7 +8,7 @@ This package is meant to simplify web page generation to a single line, while ma
 ### Before You Go Further...
 
 ```
-npm install --save express
+npm install --save express kbrew_hypertxt
 ```
 
 ### To Start
