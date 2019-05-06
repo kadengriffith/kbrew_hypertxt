@@ -1,7 +1,7 @@
 {
   "name": "kbrew_hypertxt",
-  "version": "1.0.3",
-  "description": "HTML generator written in JavaScript.",
+  "version": "1.0.5",
+  "description": "A lighweight HTML manipulator written in JavaScript.",
   "main": "kbrew_hypertxt.js",
   "author": "Kaden Griffith",
   "license": "MIT",
