@@ -1,19 +1,32 @@
-## kbrew_hypertxt -- version 1.0.5
+## kbrew_hypertxt -- version 1.0.6
 
-Hypertxt is an HTML manipulator and generator written in JavaScript.
+Hypertxt is a lightweight HTML manipulator and generator written in JavaScript.
 
 This package is meant to simplify web page generation to a single line, while managing dynamic data consistently.
-* FontAwesome icon integration by default. (!) You need to require the FontAwesome cdn in order to see the icons. The library is not included by default so those who don't use FontAwesome don't have to include the library. Keep that in mind if you are having trouble.
+
+- FontAwesome icon integration by default.
+  (!) You need to require the FontAwesome cdn in order to see the icons. The library is not included by default so those who don't use FontAwesome don't have to include the library. Keep that in mind if you are having trouble.
 
 ### Before You Go Further...
 
 In this reading we will explore:
-* [x] Hypertxt's JavaScript Object Usage
+
+- [x] Hypertxt's JavaScript Object Usage
 
 ## Installation
 
 ```
 npm i kbrew_hypertxt
+```
+
+## Importing
+
+```
+import kbrew_hypertxt from "kbrew_hypertxt";
+
+const $ = kbrew_hypertxt();
+
+$.add("body", "Hello world!");
 ```
 
 ## Basics
@@ -28,7 +41,7 @@ properties => JS Object with common HTML DOM Attributes to be attached to the cr
     = Tag within the properties object overwrites the default div tag. Any HTML DOM element type is accepted.
     ? Tags are unfiltered meaning use can be custom symantic elements eg. getElement({tag: 'ButtermilkPancakes'}) is completely valid
       expected output: <ButtermilkPancakes></ButtermilkPancakes>
-      
+
 METHODS
 
 // Close an element with configurable tag type
@@ -93,7 +106,7 @@ lIcon(properties)
 jsonParseGrab(required JSON File | raw JSON, key:string)
 ```
 
-// Use Case     \\
+// Use Case \\
 
 // In app.json
 

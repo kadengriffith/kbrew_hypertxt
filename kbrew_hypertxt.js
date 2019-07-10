@@ -1,13 +1,11 @@
 // author   : Kaden Griffith
 // filename : kbrew_hypertxt.js
-// version  : 1.0.5
+// version  : 1.0.6
 
-'use strict';
-
-class kbrew_hypertxt {
+export class kbrew_hypertxt {
   // Hypertxt constructor
   constructor() {
-    this.version = "1.0.5";
+    this.version = "1.0.6";
   }
 
   /*
@@ -16,17 +14,20 @@ class kbrew_hypertxt {
 
   // Returns an element with configurable tag type and properties
   getElement(properties) {
-    let str_element = properties.tag ? `<${properties.tag}` : '<div';
+    let str_element = properties.tag ? `<${properties.tag}` : "<div";
 
     for (let property in properties) {
-      if (!/(tag|contains|icon)/.test(property)) str_element += ` ${property}="${properties[property]}"`;
+      if (!/(tag|contains|icon)/.test(property))
+        str_element += ` ${property}="${properties[property]}"`;
     }
 
     str_element += `>${this.processContent(properties.contains)}`;
 
-    str_element += properties.tag ? this.closeElement(properties) : this.closeElement({
-      tag: 'div'
-    });
+    str_element += properties.tag
+      ? this.closeElement(properties)
+      : this.closeElement({
+          tag: "div"
+        });
 
     return str_element;
   }
@@ -36,10 +37,11 @@ class kbrew_hypertxt {
     let str_element = `<${properties.tag}`;
 
     for (let property in properties) {
-      if (!/(tag|contains|icon)/.test(property)) str_element += ` ${property}="${properties[property]}"`;
+      if (!/(tag|contains|icon)/.test(property))
+        str_element += ` ${property}="${properties[property]}"`;
     }
 
-    str_element += '>';
+    str_element += ">";
 
     return str_element;
   }
@@ -52,7 +54,7 @@ class kbrew_hypertxt {
   // Return a line break
   ln() {
     return this.getOpenElement({
-      tag: 'br'
+      tag: "br"
     });
   }
 
@@ -63,22 +65,28 @@ class kbrew_hypertxt {
 
   // Return a FontAwesome icon if Library is present in build
   icon(properties) {
-    properties.tag = 'i';
-    properties.class = this.removeLeadingWhitespace(`${this.processContent(properties.class)} fas fa-${properties.icon}`);
+    properties.tag = "i";
+    properties.class = this.removeLeadingWhitespace(
+      `${this.processContent(properties.class)} fas fa-${properties.icon}`
+    );
     return this.getElement(properties);
   }
 
   // Return a FontAwesome icon of type 'far'
   oIcon(properties) {
-    properties.tag = 'i';
-    properties.class = this.removeLeadingWhitespace(`${this.processContent(properties.class)} far fa-${properties.icon}`);
+    properties.tag = "i";
+    properties.class = this.removeLeadingWhitespace(
+      `${this.processContent(properties.class)} far fa-${properties.icon}`
+    );
     return this.getElement(properties);
   }
 
   // Return a FontAwesome icon of type 'fab'
   bIcon(properties) {
-    properties.tag = 'i';
-    properties.class = this.removeLeadingWhitespace(`${this.processContent(properties.class)} fab fa-${properties.icon}`);
+    properties.tag = "i";
+    properties.class = this.removeLeadingWhitespace(
+      `${this.processContent(properties.class)} fab fa-${properties.icon}`
+    );
 
     return this.getElement(properties);
   }
@@ -86,34 +94,38 @@ class kbrew_hypertxt {
   // Return a FontAwesome icon of type 'fal'
   // FontAwesome Premium must be active on the site
   lIcon(properties) {
-    properties.tag = 'i';
-    properties.class = this.removeLeadingWhitespace(`${this.processContent(properties.class)} fal fa-${properties.icon}`);
+    properties.tag = "i";
+    properties.class = this.removeLeadingWhitespace(
+      `${this.processContent(properties.class)} fal fa-${properties.icon}`
+    );
 
     return this.getElement(properties);
   }
 
   removeLeadingWhitespace(what) {
-    return what.replace(/^\s+/, '');
+    return what.replace(/^\s+/, "");
   }
 
   // Filter undefined innerHTML
   processContent(elementContent) {
-    return elementContent ? elementContent : '';
+    return elementContent ? elementContent : "";
   }
 
   // Get HTML document element
   get(e, index) {
-    if (!e) return this.query('body');
+    if (!e) return this.query("body");
 
-    if (e.includes('#')) {
-      return document.getElementById(e.replace(/#/, ''));
-    } else if (e.includes('.')) {
-      return index ? document.getElementsByClassName(e.replace(/./, ''))[index] : document.getElementsByClassName(e.replace(/./, ''))[0];
+    if (e.includes("#")) {
+      return document.getElementById(e.replace(/#/, ""));
+    } else if (e.includes(".")) {
+      return index
+        ? document.getElementsByClassName(e.replace(/./, ""))[index]
+        : document.getElementsByClassName(e.replace(/./, ""))[0];
     }
   }
 
   // Adds incoming string to a target HTML document element
-  add(ref, what = '') {
+  add(ref, what = "") {
     if (typeof ref === "string") {
       this.get(ref).innerHTML += what;
     } else {
@@ -124,7 +136,9 @@ class kbrew_hypertxt {
   // Removes an element
   remove(classOrID, index) {
     if (index) {
-      return this.get(classOrID, index) ? this.get(classOrID, index).remove() : false;
+      return this.get(classOrID, index)
+        ? this.get(classOrID, index).remove()
+        : false;
     } else {
       return this.get(classOrID) ? this.get(classOrID).remove() : false;
     }
@@ -148,17 +162,17 @@ class kbrew_hypertxt {
   // Clears all content in an element
   clear(e) {
     if (e) {
-      if (typeof e === 'string') {
+      if (typeof e === "string") {
         const element = this.get(e);
 
         if (element) {
-          element.innerHTML = '';
+          element.innerHTML = "";
         }
       } else {
-        e.innerHTML = '';
+        e.innerHTML = "";
       }
     }
   }
 }
 
-module.exports = new kbrew_hypertxt();
+export default kbrew_hypertxt;
